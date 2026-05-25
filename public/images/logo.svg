@@ -1,0 +1,6 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <rect width="200" height="200" rx="20" fill="#0A0A0A"/>
+  <text x="100" y="90" font-family="Arial Black" font-size="36" fill="#D4A853" text-anchor="middle" font-weight="900">DR</text>
+  <text x="100" y="130" font-family="Arial" font-size="18" fill="#F0C040" text-anchor="middle" letter-spacing="4">MOBILES</text>
+  <line x1="40" y1="105" x2="160" y2="105" stroke="#D4A853" stroke-width="1" opacity="0.5"/>
+</svg>
