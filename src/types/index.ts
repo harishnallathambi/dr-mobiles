@@ -41,3 +41,39 @@ export interface Order {
   paymentStatus: 'pending' | 'verified';
   createdAt: string;
 }
+
+export interface D1Product {
+  id: string;
+  name: string;
+  brand: string;
+  category: string;
+  price: number;
+  originalPrice?: number;
+  stock: number;
+  description: string;
+  image: string;
+  offerBadge?: string;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface D1Order {
+  id: string;
+  customerName: string;
+  email: string;
+  phone: string;
+  address: string;
+  city: string;
+  pincode: string;
+  notes: string;
+  items: string; // JSON string
+  subtotal: number;
+  total: number;
+  paymentMethod: string;
+  paymentStatus: string;
+  razorpayOrderId?: string;
+  razorpayPaymentId?: string;
+  createdAt: string;
+  updatedAt: string;
+}

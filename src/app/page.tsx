@@ -53,15 +53,7 @@ export default function Home() {
     setIsPaymentOpen(true);
   }
 
-  function handlePaymentComplete() {
-    const order: Order = {
-      orderId: generateOrderId(),
-      customer: customerDetails!,
-      items: [...items],
-      totalAmount,
-      paymentStatus: 'pending',
-      createdAt: new Date().toISOString(),
-    };
+  function handlePaymentComplete(order: any) {
     setCurrentOrder(order);
     setIsPaymentOpen(false);
     setIsOrderConfirmOpen(true);

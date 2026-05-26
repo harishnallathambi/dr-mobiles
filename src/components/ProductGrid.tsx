@@ -14,7 +14,31 @@ interface ProductGridProps {
 /*  Helpers                                                            */
 /* ------------------------------------------------------------------ */
 
-function loadAllProducts(): Product[] {
+async function loadAllProducts(): Promise<Product[]> {
+  try {
+    const res = await fetch('/api/products');
+    if (res.ok) {
+      const data: any[] = await res.json();
+      return data.map(p => ({
+        id: p.id,
+        name: p.name,
+        brand: p.brand || '',
+        category: p.category || 'Accessories',
+        price: p.price,
+        originalPrice: p.originalPrice,
+        description: p.description || '',
+        image: p.image || '/images/products/placeholder.svg',
+        offerBadge: p.offerBadge,
+        stockStatus: p.stock > 0 ? (p.stock > 5 ? 'in-stock' : 'low-stock') : 'out-of-stock',
+        stockQuantity: p.stock || 0,
+        featured: true // Or mapped from DB if available
+      })) as Product[];
+    }
+  } catch (error) {
+    console.error('Failed to fetch from API, falling back to local data', error);
+  }
+
+  // Fallback to local storage (for old local tests) + defaults
   let adminProducts: Product[] = [];
   if (typeof window !== 'undefined') {
     try {
@@ -59,13 +83,13 @@ const ProductGrid: React.FC<ProductGridProps> = ({ onViewDetails }) => {
   const [sortBy, setSortBy] = useState('featured');
   const [allProducts, setAllProducts] = useState<Product[]>(defaultProducts);
 
-  /* Merge admin products from localStorage on mount */
+  /* Fetch products on mount */
   useEffect(() => {
-    setAllProducts(loadAllProducts());
+    loadAllProducts().then(setAllProducts);
 
     const handleStorage = (e: StorageEvent) => {
       if (e.key === 'dr-mobiles-admin-products') {
-        setAllProducts(loadAllProducts());
+        loadAllProducts().then(setAllProducts);
       }
     };
     window.addEventListener('storage', handleStorage);
