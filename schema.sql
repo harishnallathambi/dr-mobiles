@@ -1,5 +1,4 @@
-DROP TABLE IF EXISTS products;
-CREATE TABLE products (
+CREATE TABLE IF NOT EXISTS products (
   id TEXT PRIMARY KEY,
   name TEXT NOT NULL,
   brand TEXT,
@@ -15,8 +14,7 @@ CREATE TABLE products (
   updatedAt TEXT DEFAULT CURRENT_TIMESTAMP
 );
 
-DROP TABLE IF EXISTS orders;
-CREATE TABLE orders (
+CREATE TABLE IF NOT EXISTS orders (
   id TEXT PRIMARY KEY,
   customerName TEXT NOT NULL,
   email TEXT,
@@ -34,4 +32,33 @@ CREATE TABLE orders (
   razorpayPaymentId TEXT,
   createdAt TEXT DEFAULT CURRENT_TIMESTAMP,
   updatedAt TEXT DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS customers (
+  id TEXT PRIMARY KEY,
+  phone TEXT UNIQUE NOT NULL,
+  name TEXT,
+  email TEXT,
+  totalOrders INTEGER DEFAULT 0,
+  createdAt TEXT DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS coupons (
+  id TEXT PRIMARY KEY,
+  code TEXT UNIQUE NOT NULL,
+  discountPercentage INTEGER,
+  flatDiscount INTEGER,
+  minOrderValue INTEGER,
+  active BOOLEAN DEFAULT 1,
+  expiryDate TEXT,
+  createdAt TEXT DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS offers (
+  id TEXT PRIMARY KEY,
+  title TEXT NOT NULL,
+  description TEXT,
+  imageUrl TEXT,
+  active BOOLEAN DEFAULT 1,
+  createdAt TEXT DEFAULT CURRENT_TIMESTAMP
 );
