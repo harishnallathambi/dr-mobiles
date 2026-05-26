@@ -9,4 +9,4 @@ not_found_handling = "single-page-application"
 [[d1_databases]]
 binding = "DB"
 database_name = "dr_mobiles_db"
-database_id = "REPLACE_WITH_CLOUDFLARE_D1_DATABASE_ID"
+database_id = "60b7c83f-ed1f-40a1-b8f1-4bb03cc9a525"
